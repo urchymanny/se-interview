@@ -29,6 +29,7 @@ Interviewing as a software developer, engineer, full-stack, etc., there are key 
 - **Testing Types**:
   - **Unit Testing**: Isolating individual components.
   - **End-to-End (E2E) Testing**: Testing the entire workflow. Gitlab CI
+  - **Integration Testing**: Testing interactions between components or systems. e.g. Interaction of application with the database.
   - **Performance Testing**: Ensuring scalability and responsiveness. (space complexity, time complexity)
 - **Quality Assurance Tools**:
   - **Linting**: Code style consistency. (RuboCop, Pylint)
