@@ -129,3 +129,89 @@ end
 
 ### What is your approach to conducting or receiving code reviews?
 - Be constructive and provide actionable feedback. Focus on the code and not the coder.
+
+# Extra
+### 1. **Service Objects**
+   - **Purpose**: Service objects are used to encapsulate complex business logic or processes that don't naturally belong to a model or controller. They keep models and controllers slim and focused on their primary responsibilities.
+   - **Use Case**: Whenever you need to perform an action that involves multiple steps or touches different parts of the application, you should consider using a service object.
+   - **Example**:
+     ```ruby
+     class ProcessOrder
+       def initialize(order)
+         @order = order
+       end
+
+       def call
+         charge_customer
+         send_confirmation_email
+         update_inventory
+       end
+
+       private
+
+       def charge_customer
+         # logic for charging customer
+       end
+
+       def send_confirmation_email
+         # logic for sending email
+       end
+
+       def update_inventory
+         # logic for updating inventory
+       end
+     end
+     ```
+   - **Advantage**: It organizes and reuses complex logic while keeping controllers and models cleaner.
+
+### 2. **Concerns**
+   - **Purpose**: Concerns are modules used to extract shared functionality across multiple models or controllers. They are used to avoid duplication of code by mixing in reusable methods.
+   - **Use Case**: When you have shared behavior across different models or controllers (e.g., a "soft delete" feature across multiple models), a concern is a good fit.
+   - **Example**:
+     ```ruby
+     # app/models/concerns/soft_deletable.rb
+     module SoftDeletable
+       def soft_delete
+         update(deleted_at: Time.current)
+       end
+
+       def deleted?
+         deleted_at.present?
+       end
+     end
+
+     # Including concern in model
+     class User < ApplicationRecord
+       include SoftDeletable
+     end
+     ```
+   - **Advantage**: DRYs up your code by allowing shared logic to be reusable across multiple places in a consistent way.
+
+### 3. **Decorators**
+   - **Purpose**: Decorators are used to extend or modify the behavior of an object, typically for presentation purposes, without changing the original object itself. They are often used to format data or add methods specifically for the view layer.
+   - **Use Case**: When you need to add functionality to an object without polluting the model or controller, or when a specific view representation of an object is needed.
+   - **Example**:
+     ```ruby
+     # app/decorators/user_decorator.rb
+     class UserDecorator < SimpleDelegator
+       def formatted_name
+         "#{first_name.capitalize} #{last_name.capitalize}"
+       end
+
+       def last_login_display
+         last_login_at.strftime("%B %d, %Y")
+       end
+     end
+
+     # Usage
+     decorated_user = UserDecorator.new(user)
+     decorated_user.formatted_name # => "John Doe"
+     ```
+   - **Advantage**: Keeps models slim by moving presentation-related logic into decorators, preserving the Single Responsibility Principle.
+
+---
+
+### Key Differences:
+- **Service Objects** are used for organizing complex business logic into isolated classes.
+- **Concerns** are used to share common behavior across models or controllers by mixing in reusable code.
+- **Decorators** are used to extend or modify the behavior of objects, typically for view-related tasks, without altering the original object itself.
