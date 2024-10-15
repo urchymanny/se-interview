@@ -20,8 +20,13 @@ A Senior Software Engineer should have a strong grasp of the following technical
 ### 3. **Databases**
 
 - **Relational Databases**: SQL, indexing, query optimization, normalization.
+  - An index is like a roadmap that helps PostgreSQL quickly locate the data without having to scan every row in a table, which can be particularly beneficial in large tables.
+    - B-tree is the most commonly used index type.
 - **NoSQL Databases**: Document stores (MongoDB), key-value stores (Redis), wide-column stores (Cassandra).
-- **Database Scaling**: Sharding, replication, and partitioning strategies.
+- **Database Scaling**: 
+  - Sharding: Split data across multiple databases/servers for scaling out. 
+  - Replication: Split data within the same database for management and performance.	
+  - and partitioning strategies.
 
 ### 4. **DevOps & Cloud Infrastructure**
 
