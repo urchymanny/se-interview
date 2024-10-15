@@ -2,7 +2,10 @@ A Senior Software Engineer should have a strong grasp of the following technical
 
 ### 1. **Software Architecture & Design**
 
-- **Design Patterns**: Understanding and applying patterns like Singleton, Factory, Observer, etc.
+- **Design Patterns**: Understanding and applying patterns like
+  - Singleton: e.g. Logger/Database connection where you want to connect one instance 
+  - Factory: e.g. Creating a new payment when multiple gateways are integrated.
+  - Observer: notify all objects if there's a new update(Microservice, Message Queues) or news agency(subject) and subscribers(tv, website) who are observing for updates from the subject
 - **Microservices Architecture**: Breaking applications into modular, independently deployable services.
 - **Monolithic vs Distributed Systems**: Trade-offs between monolithic and microservices architecture.
 - **Event-Driven Architecture**: Use of messaging, Kafka, or similar tools to handle asynchronous communication.
